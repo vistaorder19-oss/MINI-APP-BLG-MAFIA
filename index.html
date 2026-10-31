@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+=<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -303,18 +303,18 @@ nav {
   </div>
 
   <button class="category"
-  onclick="showCategory('Mousseux')">
-    MOUSSEUX <span>›</span>
+  onclick="showCategory('🧽Mousseux🧽')">
+    🧽Mousseux🧽 <span>›</span>
   </button>
 
   <button class="category"
-  onclick="showCategory('Filtré')">
-    FILTRÉ <span>›</span>
+  onclick="showCategory('🍫Filtré🍫')">
+    🍫Filtré🍫 <span>›</span>
   </button>
 
   <button class="category"
-  onclick="showCategory('Haze')">
-    HAZE <span>›</span>
+  onclick="showCategory('🍁Haze🍁')">
+    🍁Haze🍁 <span>›</span>
   </button>
 
   <!-- GALERIE VIDÉOS -->
@@ -325,7 +325,7 @@ nav {
       <span class="video-mark">▶</span>
       <div class="section-title" style="margin:0">
         VIDÉOS PRODUITS HD
-      </div>
+      </div>V
     </div>
 
     <div id="videoGallery"></div>
@@ -368,10 +368,9 @@ nav {
 </section>
 
 <p class="notice">
-  Produits CBD. Vérifier la conformité et les informations
-  réglementaires avant commercialisation.
-  Vente réservée aux adultes.
-</p>
+Prend une capture d'ecran de ton panier 
+pour valider ta commande,
+Ensuite envoie nous ton adresse
 
 </main>
 
@@ -394,21 +393,21 @@ nav {
 
 const data = {
 
-  'Mousseux': [
+  '🧽Mousseux🧽': [
     {w:'4 g',p:20},
     {w:'10 g',p:50},
     {w:'25 g',p:120},
     {w:'50 g',p:200}
   ],
 
-  'Filtré': [
+  '🍫Filtré🍫': [
     {w:'2 g',p:20},
     {w:'5 g',p:40},
     {w:'10 g',p:70},
     {w:'50 g',p:300}
   ],
 
-  'Haze': [
+  '🍁Haze🍁': [
     {w:'3 g',p:20},
     {w:'6 g',p:40},
     {w:'10 g',p:60},
@@ -460,10 +459,8 @@ function renderVideos() {
     box.innerHTML = `
       <div class="video-empty">
         Les vidéos arriveront ici.<br><br>
-        Ajoute tes fichiers MP4 dans le dossier
-        <b>videos</b> sur GitHub, puis renseigne
-        leurs noms dans la liste productVideos.
-      </div>
+        Ont vous met tout
+       ca une fois le stock en place 
     `;
 
     return;
