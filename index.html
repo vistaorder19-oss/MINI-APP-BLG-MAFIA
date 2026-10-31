@@ -1,287 +1,232 @@
-=<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090909">
-<title>BLG INDUSTRY | Ta conso Ton produit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BLG MAFIA</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 :root {
-  color-scheme: dark;
   --red: #e01924;
+  --black: #080808;
+  --dark: #151515;
+  --grey: #242424;
+  --white: #ffffff;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  background: #090909;
-  color: white;
+  background: var(--black);
+  color: var(--white);
   font-family: Arial, sans-serif;
+  padding-bottom: 100px;
 }
 
 header {
   text-align: center;
-  padding: 24px 16px;
+  padding: 25px 15px;
+  border-bottom: 2px solid var(--red);
+  background: #101010;
 }
 
-header img {
-  width: min(190px, 55vw);
-  height: auto;
+.logo {
+  max-width: 150px;
+  max-height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
-h1 {
-  font-size: 25px;
-  letter-spacing: 4px;
-  margin: 14px 0 4px;
+header h1 {
+  color: var(--red);
+  font-size: 28px;
+  letter-spacing: 3px;
 }
 
-.sub, .section-title {
+header p {
   color: #aaa;
-  letter-spacing: 2px;
   font-size: 12px;
+  margin-top: 7px;
 }
 
 main {
-  max-width: 620px;
+  max-width: 700px;
   margin: auto;
-  padding: 12px 18px 100px;
+  padding: 18px;
 }
 
 .section-title {
-  margin: 18px 0;
+  color: var(--red);
+  font-size: 21px;
+  margin: 15px 0;
+  text-transform: uppercase;
 }
 
-/* BOUTONS ÉCLAIRS */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 25px;
+}
 
-.category {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  width: 100%;
-  padding: 24px 18px;
-  margin: 10px 0;
-  background: linear-gradient(
-    110deg,
-    #151515,
-    #1d1011,
-    #151515
-  );
-  border: 1px solid var(--red);
-  border-radius: 9px;
+.category-btn {
+  background: var(--dark);
   color: white;
-  text-align: left;
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  cursor: pointer;
-  box-shadow:
-    inset 0 0 18px #e0192418,
-    0 0 10px #e019241c;
-}
-
-.category:before {
-  content: "⚡";
-  position: absolute;
-  right: 45px;
-  top: 4px;
-  font-size: 45px;
-  color: var(--red);
-  opacity: .22;
-  transform: rotate(-12deg);
-  pointer-events: none;
-}
-
-.category:after {
-  content: "⚡";
-  position: absolute;
-  right: 12px;
-  bottom: -5px;
-  font-size: 30px;
-  color: #ff4650;
-  opacity: .14;
-  pointer-events: none;
-}
-
-.category span {
-  position: relative;
-  z-index: 1;
-  float: right;
-  color: var(--red);
-  font-size: 24px;
-}
-
-/* CATALOGUE */
-
-.back {
-  background: none;
-  border: 0;
-  color: var(--red);
-  padding: 12px 0;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  padding: 13px 5px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.product, .cart-row {
-  background: #151515;
-  border: 1px solid #333;
-  border-radius: 9px;
-  padding: 16px;
-  margin: 10px 0;
+.category-btn.active {
+  background: var(--red);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
 .product {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  background: var(--dark);
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
 }
 
-.price {
-  color: var(--red);
-  font-weight: bold;
-  margin-top: 6px;
+.product h3 {
+  margin-bottom: 8px;
+  font-size: 16px;
 }
 
-.qty {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.product p {
+  color: #aaa;
+  font-size: 13px;
+  margin-bottom: 12px;
 }
 
-.qty button, .remove {
-  background: #222;
-  border: 1px solid var(--red);
+.product button {
+  background: var(--red);
   color: white;
+  border: none;
   border-radius: 6px;
-  width: 34px;
-  height: 34px;
-  font-size: 20px;
+  padding: 10px;
+  width: 100%;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.primary {
-  padding: 14px;
-  border-radius: 7px;
-  background: var(--red);
-  border: 0;
-  color: white;
+.gallery {
+  margin-top: 30px;
+}
+
+.gallery video {
   width: 100%;
-  font-weight: bold;
+  border-radius: 10px;
   margin-top: 12px;
+  background: #111;
+}
+
+.cart-box {
+  background: var(--dark);
+  border: 1px solid var(--red);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #333;
+  padding: 12px 0;
+  font-size: 14px;
+}
+
+.remove-btn {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .total {
-  text-align: right;
-  font-size: 22px;
-  font-weight: bold;
-  margin: 20px 2px;
-}
-
-.empty, .notice {
-  color: #888;
-  text-align: center;
-}
-
-.notice {
-  font-size: 11px;
-  line-height: 1.5;
-  margin: 28px 5px;
-}
-
-/* VIDÉOS PRODUITS */
-
-.video-section {
-  margin: 28px 0 18px;
-  padding: 18px 14px;
-  border: 1px solid #572027;
-  border-radius: 10px;
-  background: linear-gradient(
-    145deg,
-    #151515,
-    #0c0c0c
-  );
-  box-shadow: 0 0 18px #e0192410;
-}
-
-.video-heading {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.video-mark {
   color: var(--red);
-  font-size: 22px;
-}
-
-.video-card {
-  background: #111;
-  border: 1px solid #333;
-  border-radius: 9px;
-  padding: 10px;
-  margin: 12px 0;
-}
-
-.video-card video {
-  display: block;
-  width: 100%;
-  max-height: 520px;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  background: #000;
-  border-radius: 6px;
-}
-
-.video-name {
+  font-size: 20px;
   font-weight: bold;
-  letter-spacing: 1px;
-  margin: 10px 2px 3px;
+  text-align: right;
+  margin-top: 18px;
 }
 
-.video-empty {
-  color: #888;
-  font-size: 13px;
-  line-height: 1.5;
+.demo-note {
+  color: #999;
+  font-size: 12px;
   text-align: center;
-  padding: 14px 8px;
+  margin-top: 15px;
+  line-height: 1.5;
 }
-
-/* NAVIGATION */
 
 nav {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
-  background: #101010;
-  border-top: 1px solid #333;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 18px;
-  padding: 12px;
-  z-index: 5;
+  justify-content: space-around;
+  gap: 8px;
+  padding: 12px 8px;
+  background: #101010;
+  border-top: 2px solid var(--red);
+  z-index: 100;
 }
 
 .navbtn {
-  background: none;
-  border: 0;
+  flex: 1;
+  background: #202020;
   color: white;
-  padding: 8px 16px;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  padding: 12px 5px;
+  font-size: 14px;
   cursor: pointer;
 }
 
 .navbtn b {
-  color: var(--red);
+  margin-left: 4px;
+}
+
+.navbtn:active,
+.category-btn:active,
+.product button:active {
+  transform: scale(0.96);
 }
 
 .hidden {
-  display: none !important;
+  display: none;
+}
+
+@media (max-width: 380px) {
+  .navbtn {
+    font-size: 12px;
+  }
+
+  .categories {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
@@ -289,419 +234,269 @@ nav {
 <body>
 
 <header>
-  <img src="blg-logo.jpeg" alt="BLG INDUSTRY">
-  <h1>BLG INDUSTRY</h1>
-  <div class="sub">DIRECTION</div>
+  <img
+    src="blg-logo.jpeg"
+    alt="BLG Logo"
+    class="logo"
+    onerror="this.style.display='none'"
+  >
+
+  <h1>BLG MAFIA</h1>
+  <p>WELCOME TO BLG INDUSTRY</p>
 </header>
 
 <main>
 
-<section id="home">
+  <!-- BOUTIQUE -->
+  <section id="shopPage">
 
-  <div class="section-title">
-    CHOISIS TA CATÉGORIE
-  </div>
+    <h2 class="section-title">⚡ Boutique</h2>
 
-  <button class="category"
-  onclick="showCategory('🧽Mousseux🧽')">
-    🧽Mousseux🧽 <span>›</span>
-  </button>
+    <div class="categories">
+      <button class="category-btn active"
+        onclick="showCategory('collection1', this)">
+        COLLECTION 01
+      </button>
 
-  <button class="category"
-  onclick="showCategory('🍫Filtré🍫')">
-    🍫Filtré🍫 <span>›</span>
-  </button>
+      <button class="category-btn"
+        onclick="showCategory('collection2', this)">
+        COLLECTION 02
+      </button>
 
-  <button class="category"
-  onclick="showCategory('🍁Haze🍁')">
-    🍁Haze🍁 <span>›</span>
-  </button>
-
-  <!-- GALERIE VIDÉOS -->
-
-  <section class="video-section">
-
-    <div class="video-heading">
-      <span class="video-mark">▶</span>
-      <div class="section-title" style="margin:0">
-        VIDÉOS PRODUITS HD
-      </div>
+      <button class="category-btn"
+        onclick="showCategory('collection3', this)">
+        COLLECTION 03
+      </button>
     </div>
 
-    <div id="videoGallery"></div>
+    <div id="products" class="products"></div>
+
+    <div class="gallery">
+      <h2 class="section-title">🎬 Galerie vidéo</h2>
+
+      <video controls playsinline>
+        <source src="videos/presentation.mp4" type="video/mp4">
+        Votre navigateur ne prend pas en charge les vidéos.
+      </video>
+
+      <p class="demo-note">
+        Les vidéos de présentation seront affichées ici.
+      </p>
+    </div>
 
   </section>
 
-</section>
+  <!-- PANIER -->
+  <section id="cartPage" class="hidden">
 
-<section id="catalog" class="hidden">
+    <h2 class="section-title">🛒 Mon panier</h2>
 
-  <button class="back" onclick="goHome()">
-    ‹ RETOUR
-  </button>
+    <div class="cart-box">
+      <div id="cartItems">
+        <p class="demo-note">Ton panier est vide.</p>
+      </div>
 
-  <div class="section-title" id="catTitle"></div>
+      <div class="total">
+        Total : <span id="cartTotal">0</span> €
+      </div>
 
-  <div id="products"></div>
+      <p class="demo-note">
+        Panier de démonstration uniquement.
+        Aucune commande ou transaction n'est effectuée.
+      </p>
+    </div>
 
-</section>
+  </section>
 
-<section id="cart" class="hidden">
-
-  <button class="back" onclick="goHome()">
-    ‹ RETOUR À LA BOUTIQUE
-  </button>
-
-  <div class="section-title">
-    MON PANIER
-  </div>
-
-  <div id="cartItems"></div>
-
-  <div class="total" id="total"></div>
-
-  <p class="notice">
-    Panier de démonstration : aucun paiement
-    ni aucune commande n’est envoyé depuis cette page.
-  </p>
-
-</section>
-
-<p class="notice">
-Prend une capture d'ecran de ton panier 
-pour valider ta commande,
-Ensuite envoie nous ton adresse
-</p>
 </main>
 
+<!-- NAVIGATION -->
 <nav>
 
   <button class="navbtn" onclick="goHome()">
-    ⌂ <b>Boutique</b>
+    🏠 <b>Boutique</b>
   </button>
 
   <button class="navbtn" onclick="showCart()">
-    ▣ <b>Panier</b>
+    🛒 <b>Panier</b>
     (<span id="cartCount">0</span>)
+  </button>
+
+  <button class="navbtn" onclick="openContact()">
+    📱 <b>Contact</b>
   </button>
 
 </nav>
 
 <script>
+const tg = window.Telegram?.WebApp;
 
-/* TARIFS DU CATALOGUE */
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
 
+// Produits fictifs de démonstration
 const data = {
-
-  '🧽Mousseux🧽': [
-    {w:'4 g',p:20},
-    {w:'10 g',p:50},
-    {w:'25 g',p:120},
-    {w:'50 g',p:200}
+  collection1: [
+    {
+      name: "Article Démo 01",
+      description: "Article de présentation",
+      price: 20
+    },
+    {
+      name: "Article Démo 02",
+      description: "Article de présentation",
+      price: 30
+    }
   ],
 
-  '🍫Filtré🍫': [
-    {w:'2 g',p:20},
-    {w:'5 g',p:40},
-    {w:'10 g',p:70},
-    {w:'50 g',p:300}
+  collection2: [
+    {
+      name: "Article Démo 03",
+      description: "Article de présentation",
+      price: 40
+    },
+    {
+      name: "Article Démo 04",
+      description: "Article de présentation",
+      price: 50
+    }
   ],
 
-  '🍁Haze🍁': [
-    {w:'3 g',p:20},
-    {w:'6 g',p:40},
-    {w:'10 g',p:60},
-    {w:'25 g',p:140}
+  collection3: [
+    {
+      name: "Article Démo 05",
+      description: "Article de présentation",
+      price: 60
+    },
+    {
+      name: "Article Démo 06",
+      description: "Article de présentation",
+      price: 70
+    }
   ]
-
 };
 
+let cart = [];
 
-/*
-====================================
-GESTION DES VIDÉOS PRODUITS
-====================================
-
-Pour ajouter une vidéo :
-
-1. Crée un dossier "videos" dans GitHub.
-2. Dépose ton fichier MP4 dedans.
-3. Ajoute une ligne dans la liste ci-dessous.
-
-Exemple :
-
-{
-  title: 'Présentation produit',
-  src: 'videos/presentation.mp4'
-}
-
-Pour supprimer une vidéo, retire sa ligne.
-====================================
-*/
-
-const productVideos = [
-
-  // {title:'Présentation produit',src:'videos/presentation.mp4'},
-
-  // Ajoute tes prochaines vidéos ici.
-
-];
-
-
-/* AFFICHAGE DES VIDÉOS */
-
-function renderVideos() {
-
-  const box = document.getElementById('videoGallery');
-
-  if (!productVideos.length) {
-
-    box.innerHTML = `
-      <div class="video-empty">
-        Les vidéos arriveront ici.<br><br>
-        Ont vous met tout
-       ca une fois le stock en place 
-      </div>
-    `;
-
-    return;
-  }
-
-  box.innerHTML = productVideos.map(v => `
-
-    <article class="video-card">
-
-      <video controls playsinline preload="metadata">
-
-        <source src="${v.src}" type="video/mp4">
-
-        Ton navigateur ne peut pas lire cette vidéo.
-
-      </video>
-
-      <div class="video-name">
-        ${v.title}
-      </div>
-
-    </article>
-
-  `).join('');
-
-}
-
-renderVideos();
-
-
-/* PANIER */
-
-let cart = {};
-
-const euro = n => n.toLocaleString(
-  'fr-FR',
-  {
-    style:'currency',
-    currency:'EUR',
-    maximumFractionDigits:0
-  }
-);
-
-
-function show(id) {
-
-  ['home','catalog','cart'].forEach(x => {
-
-    document.getElementById(x)
-    .classList.toggle('hidden', x !== id);
-
+function showCategory(category, button) {
+  document.querySelectorAll(".category-btn").forEach(btn => {
+    btn.classList.remove("active");
   });
 
-}
+  button.classList.add("active");
 
+  const container = document.getElementById("products");
+  container.innerHTML = "";
 
-function goHome() {
-  show('home');
-}
+  data[category].forEach(product => {
+    const card = document.createElement("div");
+    card.className = "product";
 
-
-function showCategory(name) {
-
-  show('catalog');
-
-  document.getElementById('catTitle')
-  .textContent = name.toUpperCase();
-
-  document.getElementById('products').innerHTML =
-  data[name].map((x,i) => `
-
-    <div class="product">
-
-      <div>
-
-        <b>${x.w}</b>
-
-        <div class="price">
-          ${euro(x.p)}
-        </div>
-
-      </div>
-
-      <div class="qty">
-
-        <button onclick="change('${name}',${i},-1)">
-          −
-        </button>
-
-        <span id="q-${i}">
-          ${cart[name+'|'+i] || 0}
-        </span>
-
-        <button onclick="change('${name}',${i},1)">
-          +
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join('') +
-
-  '<button class="primary" onclick="showCart()">VOIR MON PANIER</button>';
-
-}
-
-
-function change(name,i,d) {
-
-  const key = name+'|'+i;
-
-  cart[key] = Math.max(
-    0,
-    (cart[key] || 0) + d
-  );
-
-  if (!cart[key]) delete cart[key];
-
-  document.getElementById('q-'+i).textContent =
-  cart[key] || 0;
-
-  updateCount();
-
-}
-
-
-function updateCount() {
-
-  document.getElementById('cartCount')
-  .textContent = Object.values(cart)
-  .reduce((a,b) => a+b, 0);
-
-}
-
-
-function showCart() {
-
-  show('cart');
-
-  let total = 0;
-
-  const entries = Object.entries(cart);
-
-  document.getElementById('cartItems').innerHTML =
-
-  entries.length ? entries.map(([key,q]) => {
-
-    const [name,index] = key.split('|');
-
-    const item = data[name][Number(index)];
-
-    const sum = item.p*q;
-
-    total += sum;
-
-    return `
-
-      <div class="cart-row">
-
-        <div class="product"
-        style="border:0;padding:0;margin:0">
-
-          <div>
-
-            <b>${name} · ${item.w}</b>
-
-            <div class="price">
-              ${euro(item.p)} / unité
-            </div>
-
-          </div>
-
-          <div class="qty">
-
-            <button onclick="cartChange('${key}',-1)">
-              −
-            </button>
-
-            <span>${q}</span>
-
-            <button onclick="cartChange('${key}',1)">
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-        <div style="
-        display:flex;
-        justify-content:space-between;
-        margin-top:14px">
-
-          <b>${euro(sum)}</b>
-
-          <button class="remove"
-          onclick="removeItem('${key}')">
-            ×
-          </button>
-
-        </div>
-
-      </div>
-
+    card.innerHTML = `
+      <h3>${product.name}</h3>
+      <p>${product.description}</p>
+      <button onclick="addToCart('${product.name}', ${product.price})">
+        Ajouter au panier
+      </button>
     `;
 
-  }).join('') :
-
-  '<div class="empty">Ton panier est vide pour le moment.</div>';
-
-  document.getElementById('total').textContent =
-  'Total : ' + euro(total);
-
+    container.appendChild(card);
+  });
 }
 
+function addToCart(name, price) {
+  const existing = cart.find(item => item.name === name);
 
-function cartChange(key,d) {
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({
+      name: name,
+      price: price,
+      quantity: 1
+    });
+  }
 
-  cart[key] = Math.max(0,cart[key]+d);
-
-  if (!cart[key]) delete cart[key];
-
-  updateCount();
-
-  showCart();
-
+  updateCart();
 }
 
-
-function removeItem(key) {
-
-  delete cart[key];
-
-  updateCount();
-
-  showCart();
-
+function removeFromCart(name) {
+  cart = cart.filter(item => item.name !== name);
+  updateCart();
 }
 
+function updateCart() {
+  const container = document.getElementById("cartItems");
+  const count = document.getElementById("cartCount");
+  const totalElement = document.getElementById("cartTotal");
+
+  container.innerHTML = "";
+
+  let total = 0;
+  let quantity = 0;
+
+  if (cart.length === 0) {
+    container.innerHTML =
+      '<p class="demo-note">Ton panier est vide.</p>';
+  }
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+    quantity += item.quantity;
+
+    const div = document.createElement("div");
+    div.className = "cart-item";
+
+    div.innerHTML = `
+      <span>
+        ${item.name}<br>
+        Quantité : ${item.quantity}
+      </span>
+
+      <span>${item.price * item.quantity} €</span>
+
+      <button class="remove-btn"
+        onclick="removeFromCart('${item.name}')">
+        ✕
+      </button>
+    `;
+
+    container.appendChild(div);
+  });
+
+  count.textContent = quantity;
+  totalElement.textContent = total;
+}
+
+function goHome() {
+  document.getElementById("shopPage").classList.remove("hidden");
+  document.getElementById("cartPage").classList.add("hidden");
+}
+
+function showCart() {
+  document.getElementById("shopPage").classList.add("hidden");
+  document.getElementById("cartPage").classList.remove("hidden");
+}
+
+function openContact() {
+  const url = "https://t.me/blgindustry1";
+
+  if (tg && tg.openTelegramLink) {
+    tg.openTelegramLink(url);
+  } else {
+    window.open(url, "_blank");
+  }
+}
+
+// Chargement initial
+showCategory(
+  "collection1",
+  document.querySelector(".category-btn")
+);
+
+updateCart();
 </script>
 
 </body>
