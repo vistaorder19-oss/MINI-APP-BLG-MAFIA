@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
+<head><link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,7 +17,7 @@ body {
     margin: 0;
     background: #050b16;
     color: white;
-    font-family: Black Ops One;
+    font-family: 'Permanent Marker', cursive;
     overflow-x: hidden;
 }
 
@@ -105,6 +105,32 @@ body::before {
 
 .categorie:active {
     transform: scale(.98);
+}
+/* EFFET ELECTRIQUE DBZ */
+
+.categorie {
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s;
+}
+
+.categorie:active {
+    transform: scale(.96);
+    box-shadow:
+        0 0 10px #00aaff,
+        0 0 25px #0088ff,
+        0 0 45px #ff7900;
+
+    animation: energie .25s infinite alternate;
+}
+
+@keyframes energie {
+    from {
+        filter: brightness(1);
+    }
+    to {
+        filter: brightness(1.8);
+    }
 }
 
 /* PRODUITS */
