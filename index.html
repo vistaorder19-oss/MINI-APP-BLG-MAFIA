@@ -6,6 +6,94 @@
 <title>FLASH CBD | Central City</title>
 
 <style>
+    /* FOND FLASH ANIMÉ */
+body {
+    background: #080808;
+    overflow-x: hidden;
+}
+
+/* Image de Flash en arrière-plan */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+        linear-gradient(rgba(0,0,0,.68), rgba(0,0,0,.82)),
+        url("images/flash.jpg") center center / cover no-repeat;
+    opacity: .8;
+    animation: flashBackground 8s ease-in-out infinite alternate;
+}
+
+/* Éclairs électriques */
+.lightning {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: .8;
+}
+
+.lightning svg {
+    width: 100%;
+    height: 100%;
+}
+
+.bolt {
+    fill: none;
+    stroke: #ffd700;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 7px #ffcc00)
+            drop-shadow(0 0 18px #ff2200);
+    animation: electricPulse 2s infinite;
+}
+
+.bolt:nth-child(2) {
+    stroke: #ff2020;
+    animation-delay: .7s;
+}
+
+.bolt:nth-child(3) {
+    animation-delay: 1.2s;
+}
+
+@keyframes electricPulse {
+    0%, 100% {
+        opacity: .12;
+        stroke-width: 2;
+    }
+    30% {
+        opacity: 1;
+        stroke-width: 4;
+    }
+    50% {
+        opacity: .2;
+    }
+    70% {
+        opacity: .9;
+    }
+}
+
+@keyframes flashBackground {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+}
+
+/* Contenu au-dessus des effets */
+header, nav, .container, footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* Effet vitre */
+.card, .product {
+    background: rgba(18, 18, 18, .88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 215, 0, .35);
+}
 * {
     margin: 0;
     padding: 0;
@@ -184,6 +272,20 @@ footer {
 </head>
 
 <body>
+    <div class="lightning">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+
+        <path class="bolt"
+        d="M150 0 L210 150 L160 220 L260 350 L190 470 L300 650"/>
+
+        <path class="bolt"
+        d="M950 0 L880 130 L970 240 L850 390 L930 520 L820 800"/>
+
+        <path class="bolt"
+        d="M550 0 L600 120 L530 250 L650 370 L570 520 L700 800"/>
+
+    </svg>
+</div>
 
 <header>
     <h1>⚡ FLASH CBD ⚡</h1>
