@@ -72,7 +72,7 @@ body::before {
     gap: 15px;
 }
 
-.categorie {
+..categorie {
     width: 100%;
     min-height: 145px;
 
@@ -86,26 +86,26 @@ body::before {
     border: 3px solid #ff7900;
     border-radius: 50%;
 
-    /* IMAGE À L'INTÉRIEUR DE L'OVALE */
+    /* IMAGE DANS LE BOUTON */
     background-image:
-        linear-gradient(rgba(0,0,0,.20), rgba(0,0,0,.20)),
-        url("./banniére.jpeg");
+        linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.15)),
+        url("./banniére.jpeg");
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    overflow: hidden;
-    cursor: pointer;
-
+    color: white;
     font-size: 23px;
     font-weight: 900;
     text-align: center;
     text-transform: uppercase;
-    color: white;
-
     text-shadow: 2px 2px 5px black;
 
+    cursor: pointer;
+    overflow: hidden;
+
+    position: relative;
     transition: transform .15s, box-shadow .15s;
 }
 
